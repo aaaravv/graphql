@@ -32,11 +32,16 @@ const typeDefs = `#graphql
   }
   type Mutation {
     deleteGame(id: ID!): [Game]
-    createGame(input: GameInput!): Game
+    createGame(input: CreateGameInput!): Game
+    updateGame(id: ID!, input: UpdateGameInput!): Game
   }
-  input GameInput {
+  input CreateGameInput {
     title: String!
     platform: [String!]!
+  }
+  input UpdateGameInput {
+    title: String
+    platform: [String!]
   }
 `;
 

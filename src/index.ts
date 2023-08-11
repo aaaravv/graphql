@@ -68,6 +68,22 @@ const resolvers = {
 			db.games.push(newGame);
 			return newGame;
 		},
+		updateGame: (_: any, args: { id: number; input: { title: string; platform: string[] } }) => {
+			if (!db.games.find((game) => game.id === args.id)) {
+				throw new Error(`Couldn't find game with id ${args.id}`);
+			}
+
+			const game = db.games.find((game) => game.id === args.id);
+
+			if (args.input.title) {
+				game.title = args.input.title;
+			}
+			if (args.input.platform) {
+				game.platform = args.input.platform;
+			}
+
+			return game;
+		},
 	},
 };
 
