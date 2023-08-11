@@ -54,6 +54,21 @@ const resolvers = {
 			return db.reviews.filter((review) => review.author_id === parent.id);
 		},
 	},
+	Mutation: {
+		deleteGame: (_: any, args: { id: number }) => {
+			db.games = db.games.filter((game) => game.id !== args.id);
+			return db.games;
+		},
+		createGame: (_: any, args: { input: { title: string; platform: string[] } }) => {
+			const newGame = {
+				id: String(db.games.length + 1),
+				title: args.input.title,
+				platform: args.input.platform,
+			};
+			db.games.push(newGame);
+			return newGame;
+		},
+	},
 };
 
 const server = new ApolloServer({
